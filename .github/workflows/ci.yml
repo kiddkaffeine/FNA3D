@@ -352,21 +352,17 @@ jobs:
       matrix:
         include:
           - platform: iOS
-            architectures: arm64
             sdk: iphoneos
-            package: FNA3D-SDL3-ios
-          - platform: iOS
-            architectures: x86_64;arm64
-            sdk: iphonesimulator
-            package: FNA3D-SDL3-ios-simulator
-          - platform: tvOS
             architectures: arm64
-            sdk: appletvos
-            package: FNA3D-SDL3-tvos
-          - platform: tvOS
+          - platform: iOS
+            sdk: iphonesimulator
             architectures: x86_64;arm64
+          - platform: tvOS
+            sdk: appletvos
+            architectures: arm64
+          - platform: tvOS
             sdk: appletvsimulator
-            package: FNA3D-SDL3-tvos-simulator
+            architectures: x86_64;arm64
     steps:
     - uses: actions/checkout@v4
       with:
@@ -401,5 +397,5 @@ jobs:
     - name: Archive build result
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.package }}
+        name: FNA3D-SDL3-${{ matrix.sdk }}
         path: release/*.a
